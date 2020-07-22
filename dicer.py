@@ -12,9 +12,30 @@ class Dicer(Roller):
         self.style = style
 
     def roll(self) -> int:
+        """
+        The act of rolling the Roller to produce a value.
+
+        :return: The rolled value
+        :rtype: int
+
+        :example:
+
+        >>> a = Dicer(6)
+        >>> a.roll()
+        4
+        """
         return randint(1, self.sides)
 
     def probability_dist(self) -> Dict[int, float]:
+        """
+        Gives the likelihoods of each number being rolled by the Roller
+
+        The die should have an equal probability of any side being chosen.
+
+        :return: A dictionary of probability distributions, where each key
+            is an integer that contains its probability of getting.
+        :rtype: dict
+        """
         dist_vals = dict()
 
         for i in range(self.sides):
