@@ -9,7 +9,7 @@ class RollerFactory():
 
 
     @staticmethod
-    def roller_string(in_roll_str="2d8 3d6 7") -> List[Roller]:
+    def create_roller_by_string(in_roll_str: str="2d8 3d6 7") -> List[Roller]:
         new_rolls = list()
 
         for roll_clips in in_roll_str.split():
@@ -31,7 +31,7 @@ class RollerFactory():
 if __name__ == '__main__':
     x = RollerFactory()
 
-    y = RollerFactory.roller_string()
+    y = RollerFactory.create_roller_by_string()
 
     for i in y:
         print(i)
