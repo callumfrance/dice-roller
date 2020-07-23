@@ -7,9 +7,20 @@ from roller import Roller
 class Dicer(Roller):
 
 
-    def __init__(self, sides=6, style=None):
+    def __init__(self, sides: int=6, style=None):
         self.sides = sides
         self.style = style
+
+    @property
+    def sides(self) -> int:
+        return self.sides
+
+    @sides.setter
+    def sides(self, sides: int=6):
+        if sides < 0:
+            sides = 1
+        self._sides = sides
+
 
     def roll(self) -> int:
         """

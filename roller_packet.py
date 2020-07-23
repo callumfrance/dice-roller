@@ -11,6 +11,12 @@ class RollerPacket():
         self.rollers = list()
 
     def roll_all(self) -> Set[int, List[Set[int, Roller]]]:
+        """
+        :return: A set that contains:
+            - The integer total that has been rolled
+            - A list of every Roller's total that was rolled, plus that Roller
+        :rtype: Set
+        """
         pass
 
     def statistics(self) -> Dict[int, float]:
