@@ -13,10 +13,7 @@ class RollerFactory():
         new_rolls = list()
 
         for roll_clips in in_roll_str.split():
-            print("roll_clips", roll_clips)
-
             roll_di = roll_clips.split("d")
-            print(roll_di)
 
             if len(roll_di) < 2:
                 new_rolls.append(Modifier(int(roll_di[0])))

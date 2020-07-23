@@ -13,13 +13,13 @@ class Dicer(Roller):
 
     @property
     def sides(self) -> int:
-        return self.sides
+        return self._sides
 
     @sides.setter
-    def sides(self, sides: int=6):
-        if sides < 0:
-            sides = 1
-        self._sides = sides
+    def sides(self, in_sides: int=6):
+        if in_sides < 0:
+            in_sides = 1
+        self._sides = in_sides
 
 
     def roll(self) -> int:
