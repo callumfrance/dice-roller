@@ -7,9 +7,9 @@ from roller import Roller
 class Dicer(Roller):
 
 
-    def __init__(self, sides: int=6, style=None):
+    def __init__(self, sides: int=6, style=None, sign: str='+'):
+        super().__init__(sign=sign, style=style)
         self.sides = sides
-        self.style = style
 
     @property
     def sides(self) -> int:
@@ -21,6 +21,21 @@ class Dicer(Roller):
             in_sides = 1
         self._sides = in_sides
 
+    @property
+    def style(self):
+        return super().style
+
+    @style.setter
+    def style(self, style: str=None):
+        super(Dicer, self.__class__).style.fset(self, style)
+
+    @property
+    def sign(self):
+        return super().sign
+
+    @sign.setter
+    def sign(self, sign: str="+"):
+        super(Dicer, self.__class__).sign.fset(self, sign)
 
     def roll(self) -> int:
         """

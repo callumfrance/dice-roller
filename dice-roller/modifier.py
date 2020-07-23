@@ -5,9 +5,25 @@ from typing import Dict
 class Modifier(Roller):
 
 
-    def __init__(self, value: int=1, style: str=None):
+    def __init__(self, value: int=1, style: str=None, sign: str='+'):
+        super().__init__(sign=sign, style=style)
         self.value = value
-        self.style = None
+
+    @property
+    def style(self):
+        return super().style
+
+    @style.setter
+    def style(self, style: str=None):
+        super(Modifier, self.__class__).style.fset(self, style)
+
+    @property
+    def sign(self):
+        return super().sign
+
+    @sign.setter
+    def sign(self, sign: str="+"):
+        super(Modifier, self.__class__).sign.fset(self, sign)
 
     def roll(self) -> int:
         return self.value

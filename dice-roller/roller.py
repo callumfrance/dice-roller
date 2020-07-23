@@ -10,6 +10,11 @@ class Roller(metaclass=ABCMeta):
     :param str sign: The + or - sign indicator of the Roller's value
     """
 
+    @abstractmethod
+    def __init__(self, sign, style):
+        self.sign = sign
+        self.style = style
+
 
     @property
     def style(self):
