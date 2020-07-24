@@ -17,3 +17,5 @@ Lets say you want to roll three 12-sided dice and nine 6-sided dice at the same 
 
 ## Statistics
 Sometimes you want to know just how likely you are to roll above `X`, below `Y`, or exactly `20`. With *Dice-Roller*, you will be able to view the statistics of a roll before you roll, so you can compare between dice sets and see your probabilities before they become realized. Pretty neat right?
+
+![UML Diagram](/UML_Dice-Roller.jpg)
