@@ -1,9 +1,6 @@
 from typing import Dict, Tuple, List
 
 from roller import Roller
-from roller_factory import RollerFactory
-from dicer import Dicer
-from modifier import Modifier
 
 
 class RollerPacket():
@@ -11,6 +8,12 @@ class RollerPacket():
 
     def __init__(self):
         self.rollers = list()
+
+    def add_rollers(self, in_roll_data: str, in_seg_fact):
+        new_rollers = in_seg_fact.create_roller_by_string(in_roll_data)
+
+        for x in new_rollers:
+            self.rollers.append(x)
 
     def roll_all(self) -> Tuple[int, List[Tuple[int, Roller]]]:
         """
@@ -61,6 +64,8 @@ class RollerPacket():
 
 
 if __name__ == '__main__':
+    from roller_factory import RollerFactory
+
     rp = RollerPacket()
     rf = RollerFactory()
 
@@ -73,11 +78,12 @@ if __name__ == '__main__':
 
     for x in run[1]:
         print(x[0], end="\t")
-        if isinstance(x[1], Dicer):
-            print("d", x[1].sides, end="")
-        if isinstance(x[1], Modifier):
-            print("M", x[1].value, end="")
-        print()
+
+        print(type(x[1]), "\t", vars(x[1]))
+        # if isinstance(x[1], Dicer):
+        #     print("d", x[1].sides, end="")
+        # if isinstance(x[1], Modifier):
+        #     print("M", x[1].value, end="")
 
 
     stats = rp.statistics()

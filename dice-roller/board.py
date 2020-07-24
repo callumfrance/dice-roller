@@ -1,44 +1,49 @@
-from roller import Roller
-
-from modifier import Modifier
-from dicer import Dicer
+from roller_factory import RollerFactory
+from roller_packet import RollerPacket
 
 
 class Board():
 
 
-    def __init__(self, dice=dict(), mods=list()):
-        self.dice = dice
-        self.mods = mods
+    def __init__(self):
+        self.roller_packets = list()
+        self.roller_factory = RollerFactory()
 
+    def add_rollers(self, in_roll_data: str, in_seg_fact=None):
+        """ Use the RollerFactory to create new Rollers inside the RollerPacket
+        """
+        if in_seg_fact is None:
+            in_seg_fact = self.roller_factory
 
-    def add_roller(self, new_roller):
-        if new_roller.isinstance(Modifier):
-            self.mods.append(new_roller)
-        elif new_roller.isinstance(Dicer):
-            self.dice.setdefault(new_roller.sides, []).append(new_roller)
+        # New Rolls are a RollerPacket object of Roller objects
+        new_rollers = RollerPacket()
+        new_rollers.add_rollers(in_roll_data, in_seg_fact)
+        # Board's self.roller_packets now contains the new RollerPacket item
+        self.roller_packets.append(new_rollers)
 
     def roll_all(self) -> int:
-        total = 0
-        total_replay = list()
+        all_packet_rolls = list()
 
-        for i in self.mods:
-            total_replay.append(i.roll())
-            total += total_replay[-1]
+        for x in self.roller_packets:
+            all_packet_rolls.append(x.roll_all())
 
-        for key in self.dice:
-            for j in self.dice[key]:
-                total_replay.append(j.roll())
-                total += total_replay[-1]
-
-        return (total_replay, total)
-
+        return all_packet_rolls
 
 
 if __name__ == '__main__':
-    rollers = Board(dice={6: [Dicer(6), Dicer(6)]},
-            mods=[Modifier(1), Modifier(3)])
+    b = Board()
 
-    print(rollers)
+    b.add_rollers("2d6 + 4d8 - 3")
+    b.add_rollers("-5")
+    b.add_rollers("3")
+    b.add_rollers("1d20 + 1d4")
 
-    print(rollers.roll_all())
+    print("----------------------------------------")
+    print("self.roller_packets: ")
+    print("\tlen: ", len(b.roller_packets))
+    print("----------------------------------------")
+
+    y = b.roll_all()
+
+    for i in y:
+        print(type(i), "\t", i, end="\n\n")
