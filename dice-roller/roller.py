@@ -18,7 +18,7 @@ class Roller(metaclass=ABCMeta):
 
     @property
     def style(self):
-        return self.style
+        return self._style
 
     @style.setter
     def style(self, style: str=None):
@@ -26,7 +26,7 @@ class Roller(metaclass=ABCMeta):
 
     @property
     def sign(self):
-        return self.sign
+        return self._sign
 
     @sign.setter
     def sign(self, sign: str="+"):

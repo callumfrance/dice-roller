@@ -50,7 +50,10 @@ class Dicer(Roller):
         >>> a.roll()
         4
         """
-        return randint(1, self.sides)
+        if self.sign == '-':
+            return -1 * randint(1, self.sides)
+        else:
+            return randint(1, self.sides)
 
     def probability_dist(self) -> Dict[int, float]:
         """

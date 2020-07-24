@@ -63,12 +63,15 @@ class BoundedDicer(Dicer):
         :return: The roll, bounded by either the min or max value
         :rtype: int
         """
-        base_roll = super().roll(self)
+        base_roll = abs(super().roll(self))
 
         if base_roll < self.min_value:
             base_roll = self.min_value
         elif base_roll > self.max_value:
             base_roll = self.max_value
+
+        if self.sign == '-':
+            return -1 * base_roll
 
         return base_roll
 

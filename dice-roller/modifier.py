@@ -26,7 +26,10 @@ class Modifier(Roller):
         super(Modifier, self.__class__).sign.fset(self, sign)
 
     def roll(self) -> int:
-        return self.value
+        if self.sign == '-':
+            return -1 * self.value
+        else:
+            return self.value
 
     def probability_dist(self) -> Dict[int, float]:
         return {self.value: 1.0}
