@@ -33,10 +33,13 @@ class Board():
 if __name__ == '__main__':
     b = Board()
 
-    b.add_rollers("2d6 + 4d8 - 3")
-    b.add_rollers("-5")
-    b.add_rollers("3")
-    b.add_rollers("1d20 + 1d4")
+    # b.add_rollers("2d6 + 4d8 - 3")
+    # b.add_rollers("-5")
+    # b.add_rollers("3")
+    # b.add_rollers("1d20 + 1d4")
+
+    print("Choose the dice to roll: ")
+    b.add_rollers(input("\n>"))
 
     print("----------------------------------------")
     print("self.roller_packets: ")
