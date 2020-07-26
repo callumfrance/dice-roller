@@ -1,6 +1,6 @@
 from typing import Dict, Tuple, List
 
-from roller import Roller
+from model.roller import Roller
 
 
 class RollerPacket():

@@ -1,7 +1,7 @@
 from random import randint
 from typing import Dict
 
-from roller import Roller
+from model.roller import Roller
 
 
 class Dicer(Roller):
