@@ -1,8 +1,8 @@
 from typing import List
 
-from model.roller import Roller
-from model.dicer import Dicer
-from model.modifier import Modifier
+from .roller import Roller
+from .dicer import Dicer
+from .modifier import Modifier
 
 
 class RollerFactory():

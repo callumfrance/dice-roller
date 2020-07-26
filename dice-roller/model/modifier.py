@@ -1,6 +1,6 @@
 from typing import Dict
 
-from model.roller import Roller
+from .roller import Roller
 
 
 class Modifier(Roller):

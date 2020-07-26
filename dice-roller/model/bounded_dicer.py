@@ -1,6 +1,6 @@
 from typing import Dict
 
-from model.dicer import Dicer
+from .dicer import Dicer
 
 
 class BoundedDicer(Dicer):

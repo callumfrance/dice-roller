@@ -1,4 +1,4 @@
-from model.roller_packet import RollerPacket
+from .roller_packet import RollerPacket
 
 
 class Board():

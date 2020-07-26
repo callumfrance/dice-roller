@@ -5,8 +5,8 @@ def create_app(test_config=None):
 
     @app.route('/')
     def base():
-        from model.board import Board
-        from model.roller_factory import RollerFactory
+        from .model.board import Board
+        from .model.roller_factory import RollerFactory
 
         r_str = ""
 
@@ -33,8 +33,8 @@ def create_app(test_config=None):
 
 if __name__ == '__main__':
     print(__name__, __package__)
-    from model.board import Board
-    from model.roller_factory import RollerFactory
+    from .model.board import Board
+    from .model.roller_factory import RollerFactory
 
     b = Board()
     rf = RollerFactory()
