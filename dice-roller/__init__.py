@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import (Flask, render_template)
 
 def create_app(test_config=None):
     app = Flask(__name__, instance_relative_config=True)
@@ -8,7 +8,7 @@ def create_app(test_config=None):
         from .model.board import Board
         from .model.roller_factory import RollerFactory
 
-        r_str = ""
+        r_out = list()
 
         b = Board()
         rf = RollerFactory()
@@ -17,17 +17,17 @@ def create_app(test_config=None):
 
         b.add_packet(rp_str, rf)
 
-        r_str += "----------------------------------------\n"
-        r_str += "self.roller_packets: \n"
-        r_str += "\tlen: " + str(len(b.roller_packets)) + "\n"
-        r_str += "----------------------------------------\n\n"
+        r_out.append(str("----------------------------------------\n"))
+        r_out.append(str("self.roller_packets: \n"))
+        r_out.append(str("\tlen: " + str(len(b.roller_packets)) + "\n"))
+        r_out.append(str("----------------------------------------\n\n"))
 
         y = b.roll_all()
 
         for i in y:
-            r_str += str(type(i)) + "\t" + str(i) + "\n\n"
+            r_out.append(str(str(type(i)) + "\t" + str(i) + "\n\n"))
 
-        return r_str
+        return render_template('main.html', r_out=r_out)
 
     return app
 
