@@ -5,17 +5,12 @@
     <title></title>
 </head>
 <body>
-    <h1>Total is: {{ result }}</h1>
-
-    <hr>
-    
-    <div class="roll_results">
-        {% for n in range(roll_results | length) %}
-            <p> {{ roll_results[n][0] }} </p>
-            <p>{{ roll_results[n][1] }}</p>
-            <hr>
+    <div style="background: PapayaWhip;" class="roll_results_1">
+        {% for rp in whole_hog %}
+            <p>Total is {{ rp[0] }}</p>
+            <p>{{ rp[1] }}</p>
         {% endfor %}
+        <hr>
     </div>
-
 </body>
 </html>

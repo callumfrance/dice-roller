@@ -1,3 +1,5 @@
+from typing import List
+
 from .roller_packet import RollerPacket
 
 
@@ -7,7 +9,16 @@ class Board():
     def __init__(self):
         self.roller_packets = list()
 
-    def add_packet(self, in_roll_data: str, in_seg_fact) -> RollerPacket:
+    def add_packets(self, in_packet_data: str, in_seg_fact) -> List[RollerPacket]:
+        """
+        Adds newly created RollerPackets to the board object and returns these
+            newly created objects in a list.
+        """
+        new_packs = in_seg_fact.create_packets_by_string(in_packet_data)
+        self.roller_packets += new_packs
+        return new_packs
+
+    def add_a_packet(self, in_roll_data: str, in_seg_fact) -> RollerPacket:
         """ Use the RollerFactory to create a new RollerPacket containing Rollers
 
         :return: The newly created RollerPacket, listed inside of Board object
@@ -22,7 +33,7 @@ class Board():
 
         return new_rpack
 
-    def roll_all(self) -> int:
+    def roll_all(self):
         all_packet_rolls = list()
 
         for x in self.roller_packets:

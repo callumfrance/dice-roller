@@ -28,7 +28,7 @@ class RollerFactory():
         new_rps = list()
 
         for x in in_rp_str.split(';'):
-            new_rps.append(RollerFactory.create_roller_by_string(x))
+            new_rps.append(RollerPacket(RollerFactory.create_roller_by_string(x)))
 
         return new_rps
 

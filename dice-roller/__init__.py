@@ -10,14 +10,13 @@ def create_app(test_config=None):
 
         b = Board()
         rf = RollerFactory()
-        b.add_packet(roll_str, rf)
+        b.add_packets(roll_str, rf)
 
         roll = b.roll_all()
 
         # return str(b.roll_all())
         return render_template('rolled.html', \
-                result=roll[0][0], \
-                roll_results=roll[0][1], \
+                whole_hog=roll, \
             )
 
     @app.route('/build')
@@ -49,7 +48,7 @@ def create_app(test_config=None):
 
         rp_str = "2d5 + 1d20 - 17 - 2d2 + 1"
 
-        b.add_packet(rp_str, rf)
+        b.add_a_packet(rp_str, rf)
 
         r_out.append(str("----------------------------------------\n"))
         r_out.append(str("self.roller_packets: \n"))
@@ -75,7 +74,7 @@ if __name__ == '__main__':
 
     rp_str = input("\n>")
 
-    b.add_packet(rp_str, rf)
+    b.add_a_packet(rp_str, rf)
 
     print("----------------------------------------")
     print("self.roller_packets: ")
