@@ -26,7 +26,7 @@ class RollerPacket():
         rolled = list()
 
         for i in self.rollers:
-            rolled.append((i.roll(), i))
+            rolled.append((i.roll(), i.name))
             total += rolled[-1][0]
 
         return (total, rolled)

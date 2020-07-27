@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+    <h1>Total is: {{ result }}</h1>
+
+    <hr>
+    
+    <div class="roll_results">
+        {% for n in range(roll_results | length) %}
+            <p> {{ roll_results[n][0] }} </p>
+            <p>{{ roll_results[n][1] }}</p>
+            <hr>
+        {% endfor %}
+    </div>
+
+</body>
+</html>

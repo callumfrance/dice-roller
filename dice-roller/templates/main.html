@@ -9,9 +9,14 @@
 </head>
 <body>
 
+    {{ r_out|escape|pprint }}
+
+    <hr>
+    <br>
+
     {% for val in r_out %}
         <p>
-            {{ val }}
+        {{ val|escape|pprint }}
         </p>
         <br>
     {% endfor %}

@@ -7,8 +7,14 @@ from .roller import Roller
 class Dicer(Roller):
 
 
-    def __init__(self, sides: int=6, style=None, sign: str='+'):
-        super().__init__(sign=sign, style=style)
+    def __init__(self, \
+            sides: int=6, \
+            style=None, \
+            sign: str='+', \
+            name: str=None):
+        if not name:
+            name = type(self).__name__
+        super().__init__(sign=sign, style=style, name=name)
         self.sides = sides
 
     @property
@@ -20,6 +26,14 @@ class Dicer(Roller):
         if in_sides < 0:
             in_sides = 1
         self._sides = in_sides
+
+    @property
+    def name(self):
+        return super().name
+
+    @name.setter
+    def name(self, name: str=None):
+        super(Dicer, self.__class__).name.fset(self, name)
 
     @property
     def style(self):

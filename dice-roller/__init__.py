@@ -1,7 +1,41 @@
-from flask import (Flask, render_template)
+from flask import (Flask, render_template, request)
 
 def create_app(test_config=None):
     app = Flask(__name__, instance_relative_config=True)
+
+    @app.route('/quick/<roll_str>')
+    def dice_quick_roll(roll_str):
+        from .model.board import Board
+        from .model.roller_factory import RollerFactory
+
+        b = Board()
+        rf = RollerFactory()
+        b.add_packet(roll_str, rf)
+
+        roll = b.roll_all()
+
+        # return str(b.roll_all())
+        return render_template('rolled.html', \
+                result=roll[0][0], \
+                roll_results=roll[0][1], \
+            )
+
+    @app.route('/build')
+    def dice_build():
+        return render_template('dice_build.html')
+
+    @app.route('/sc', methods=['GET'])
+    def dice_form_built():
+        # text = request.form['text']
+        # text = request.args['text']
+        a = request.args
+        a_i = ''
+        text = request.args.get('text')
+        for i in a:
+            a_i += i + ': '
+            a_i += a.get(i) + "   "
+
+        return str((str(a), "---------", str(a_i)))
 
     @app.route('/')
     def base():
