@@ -1,5 +1,6 @@
 from typing import List
 
+from .roller_packet import RollerPacket
 from .roller import Roller
 from .dicer import Dicer
 from .modifier import Modifier
@@ -7,6 +8,29 @@ from .modifier import Modifier
 
 class RollerFactory():
 
+    @staticmethod
+    def create_packets_by_string(in_rp_str: str=None) -> List[RollerPacket]:
+        """
+        Factory method takes a shorthand string and creates new RollerPackets
+
+        :param str in_rp_str: A list of Rollers, segmented into RP's using ';'
+        :return: The newly created list of RollerPacket objects, which contains
+            The corresponding Rollers within each one.
+        :rtype: List[RollerPacket]
+
+        :example:
+
+        x = RollerFactory()
+        y = Board()
+
+        y.roller_packets = x.create_packets_by_string("1d20+5; 2d6+4")
+        """
+        new_rps = list()
+
+        for x in in_rp_str.split(';'):
+            new_rps.append(RollerFactory.create_roller_by_string(x))
+
+        return new_rps
 
     @staticmethod
     def create_roller_by_string(in_roll_str: str="2d8 - 3d6 + 7 + 2d4 - 6") -> List[Roller]:
