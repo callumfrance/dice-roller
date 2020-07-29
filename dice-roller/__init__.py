@@ -1,7 +1,15 @@
-from flask import (Flask, render_template, request)
+from flask import (Flask, 
+        redirect,
+        render_template,
+        request,
+        url_for,)
 
 def create_app(test_config=None):
     app = Flask(__name__, instance_relative_config=True)
+
+    @app.route('/quick/')
+    def dice_quick_empty():
+        return redirect(url_for('dice_build'))
 
     @app.route('/quick/<roll_str>')
     def dice_quick_roll(roll_str):
