@@ -29,7 +29,13 @@ def create_app(test_config=None):
 
     @app.route('/build')
     def dice_build():
-        return render_template('dice_build.html')
+        dice = {'d4': 'LimeGreen', 
+                'd6': 'LightCoral', 
+                'd8': 'DodgerBlue',
+                'd10': 'DarkOrange',
+                'd12': 'PeachPuff',
+                'd20': 'Plum',}
+        return render_template('dice_build.html', dice_types=dice)
 
     @app.route('/sc', methods=['GET'])
     def dice_form_built():

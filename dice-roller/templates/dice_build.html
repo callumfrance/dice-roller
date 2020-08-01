@@ -12,80 +12,62 @@
 <body>
 	<div class="container-fluid">
 		<div class="row m-3">
-			<div class="card col-lg-2 col-md-4 col-sm-6 my-2">
-				<div class="card-body">
-					<p class="card-text">1</p>
-				</div>
-				<button class="btn btn-primary float-left mb-1">+1d20</button>
-				<button class="btn btn-primary float-right">-1d20</button>
-			</div>
-			<div class="card col-lg-2 col-md-4 col-sm-6 my-2">
-				<div class="card-body">
-					<p class="card-text">2</p>
-				</div>
-				<button class="btn btn-primary float-left mb-1">+1d4</button>
-				<button class="btn btn-primary float-righ">-1d4</button>
-			</div>
-			<div class="card col-lg-2 col-md-4 col-sm-6 my-2">
-				<div class="card-body">
-					<p class="card-text">3</p>
-				</div>
-				<button class="btn btn-primary float-left mb-1">+1d6</button>
-				<button class="btn btn-primary float-righ">-1d6</button>
-			</div>
-			<div class="col-lg-2 col-md-4 col-sm-6 my-2">
-				<div class="card row">
-					<div class="input-group input-group-lg col-12">
-						<input id="d8-input" class="form-control my-2" type="number">
-						<div class="input-group-append my-2" onClick="document.getElementById('d8-input').value = 1;">
-							<span class="input-group-text" style="background:LimeGreen;">d8</span>
+
+			{% for dice_type, dice_colour in dice_types.items() %}
+				{# dice_type must be 'd8' style string #}
+				{# dice_colour must be 'LimeGreen' style string #}
+				<div class="col-lg-2 col-md-4 col-sm-6 my-2">
+					<div class="row">
+						<div class="col-11 mx-auto">
+							<div class="card row">
+								<div class="input-group input-group-lg col-12">
+									<input id="{{ dice_type }}-input" class="form-control my-2" type="number">
+									<div class="input-group-append my-2" onClick="document.getElementById('{{ dice_type }}-input').value = 1;">
+										<span class="input-group-text" style="background:{{ dice_colour }};">{{ dice_type }}</span>
+									</div>
+								</div>
+								<div class="input-group input-group-lg col-12">
+									<button onClick="document.getElementById('{{ dice_type }}-input').value = '';" class="btn btn-secondary mb-2 col-12">Reset</button>
+								</div>
+							</div>
 						</div>
 					</div>
-					<div class="input-group input-group-lg col-12">
-						<button onClick="document.getElementById('d8-input').value = '';" class="btn btn-secondary mb-2 col-12">Reset</button>
+				</div>
+			{% endfor %}
+
+			<div class="col-sm-6 my-2">
+				<div class="row">
+					<div class="col-11 mx-auto">
+						<div class="card row">
+							<div class="input-group input-group-lg col-12">
+								<input class="form-control my-2" type="number">
+								<div class="input-group-append my-2"><span class="input-group-text">d</span></div>
+								<input class="form-control my-2" type="number">
+							</div>
+							<div class="input-group input-group-lg col-12">
+								<button onClick="document.getElementById('{{ dice_type }}-input').value = '';" class="btn btn-secondary mb-2 col-12">Reset</button>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
-			<div class="col-lg-2 col-md-4 col-sm-6 my-2">
-				<div class="card">
-					<button onClick="resetRollers([document.getElementById('A2'), document.getElementById('B2')])" class="btn btn-secondary mb-1">Reset</button>
-					<div class="card-body row mx-0 px-0">
-						<h5 class="card-title col-12 text-center">d10</h5>
-						<p id="A2" class="card-text col-6 text-left">-</p>
-						<p id="B2" class="card-text col-6 text-right">-</p>
+
+			<div class="col-sm-6 my-2">
+				<div class="row">
+					<div class="col-11 mx-auto">
+						<div class="card row">
+							<div class="input-group input-group-lg col-12">
+								<div class="input-group-prepend my-2"><span class="input-group-text">Modifier</span></div>
+								<input class="form-control my-2" type="number">
+							</div>
+							<div class="input-group input-group-lg col-12">
+								<button onClick="document.getElementById('{{ dice_type }}-input').value = '';" class="btn btn-secondary mb-2 col-12">Reset</button>
+							</div>
+						</div>
 					</div>
-					<button class="btn btn-primary float-left mb-1">+1d10</button>
-					<button class="btn btn-primary float-righ">-1d10</button>
 				</div>
 			</div>
-			<div class="col-lg-2 col-md-4 col-sm-6 my-2" style="background: PapayaWhip;">
-				<div class="card">
-					<button onClick="resetRollers([document.getElementById('A'), document.getElementById('B')])" class="btn btn-secondary mb-1">Reset</button>
-					<div class="card-body row mx-0 px-0">
-						<h5 class="card-title col-12 text-center">d12</h5>
-						<p id="A" class="card-text col-6 text-left">-</p>
-						<p id="B" class="card-text col-6 text-right">-</p>
-					</div>
-					<button onClick="addNewRoller(document.getElementById('A'), 'd12', '+')" class="btn btn-primary float-left mb-1">+1d12</button>
-					<button onClick="addNewRoller(document.getElementById('B'), 'd12', '-')" class="btn btn-primary float-righ">-1d12</button>
-				</div>
-			</div>
-			<div class="card col-md-6 col-sm-6 my-2">
-				<div class="card-body">
-					<p class="card-text">7</p>
-				</div>
-				<input type="number" class="mb-1" min="1">
-				<button class="btn btn-primary float-left mb-1">+1dX</button>
-				<button class="btn btn-primary float-righ">-1dX</button>
-			</div>
-			<div class="card col-md-6 col-sm-6 my-2">
-				<div class="card-body">
-					<p class="card-text">8</p>
-				</div>
-				<input type="number" class="mb-1" min="1">
-				<button class="btn btn-primary float-left mb-1">+X</button>
-				<button class="btn btn-primary float-righ">-X</button>
-			</div>
+
 		</div>
 	</div>
 	<div class="container-fluid">
