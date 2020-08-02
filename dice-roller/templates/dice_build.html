@@ -10,7 +10,7 @@
 	</style>
 </head>
 <body>
-	<div class="container-fluid">
+	<div class="container-fluid" style="max-width: 1600px;">
 		<form method="POST">
 		<div class="row m-3">
 
@@ -23,8 +23,8 @@
 							<div class="card row">
 								<div class="input-group input-group-lg col-12">
 									<input id="{{ dice_type }}-input" name="{{ dice_type }}" class="form-control my-2" type="number">
-									<div class="input-group-append my-2" onClick="addRollerFlask(document.getElementById('{{ dice_type }}-input'));">
-										<span class="input-group-text" style="background:{{ dice_colour }};">{{ dice_type }}</span>
+									<div class="input-group-append my-2 d-flex" onClick="addRollerFlask(document.getElementById('{{ dice_type }}-input'));">
+										<span class="input-group-text m-0 p-0 justify-content-center" style="background:{{ dice_colour }}; width: 3em;">{{ dice_type }}</span>
 									</div>
 								</div>
 							</div>
@@ -38,9 +38,9 @@
 					<div class="col-11 mx-auto">
 						<div class="card row">
 							<div class="input-group input-group-lg col-12">
-								<input class="form-control my-2" type="number" disabled>
-								<div class="input-group-append my-2"><span class="input-group-text">d</span></div>
-								<input class="form-control my-2" type="number" disabled>
+								<input id="dX-input" name="dX" class="form-control my-2" type="number">
+								<div class="input-group-append my-2"><span class="input-group-text" style="background:LemonChiffon;">d</span></div>
+								<input id="dX-X" name="dXX" class="form-control my-2" type="number" min="1">
 							</div>
 							<!-- div class="input-group input-group-lg col-12">
 								<div onClick="document.getElementById('{{ dice_type }}-input').value = '';" class="btn btn-secondary mb-2 col-12">Reset</div>
@@ -55,7 +55,7 @@
 					<div class="col-11 mx-auto">
 						<div class="card row">
 							<div class="input-group input-group-lg col-12">
-								<div class="input-group-prepend my-2"><span class="input-group-text">Modifier</span></div>
+								<div class="input-group-prepend my-2"><span class="input-group-text" style="background:PaleTurquoise;">Modifier</span></div>
 								<input id="modifier-input" name="m" class="form-control my-2" type="number">
 							</div>
 						</div>
