@@ -11,10 +11,18 @@ class Roller(metaclass=ABCMeta):
     """
 
     @abstractmethod
-    def __init__(self, sign, style):
+    def __init__(self, sign, style, name):
         self.sign = sign
         self.style = style
+        self.name = name
 
+    @property
+    def name(self):
+        return self._name
+
+    @name.setter
+    def name(self, name: str=None):
+        self._name = name
 
     @property
     def style(self):

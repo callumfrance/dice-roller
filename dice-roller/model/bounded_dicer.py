@@ -1,12 +1,14 @@
 from typing import Dict
 
-from dicer import Dicer
+from .dicer import Dicer
 
 
 class BoundedDicer(Dicer):
 
 
-    def __init__(self, in_min: int=1, in_max=None):
+    def __init__(self, \
+            in_min: int=1, \
+            in_max=None):
         """ Constructor for the BoundedDicer class
 
         :param in_min: The minimum possible integer to roll

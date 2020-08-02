@@ -1,13 +1,28 @@
-from roller import Roller
 from typing import Dict
+
+from .roller import Roller
 
 
 class Modifier(Roller):
 
 
-    def __init__(self, value: int=1, style: str=None, sign: str='+'):
-        super().__init__(sign=sign, style=style)
+    def __init__(self, \
+            value: int=1, \
+            style: str=None, \
+            sign: str='+', \
+            name: str=None):
+        if not name:
+            name = type(self).__name__
+        super().__init__(sign=sign, style=style, name=name)
         self.value = value
+
+    @property
+    def name(self):
+        return super().name
+
+    @name.setter
+    def name(self, name: str=None):
+        super(Modifier, self.__class__).name.fset(self, name)
 
     @property
     def style(self):

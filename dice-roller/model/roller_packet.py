@@ -1,13 +1,16 @@
 from typing import Dict, Tuple, List
 
-from roller import Roller
+from .roller import Roller
 
 
 class RollerPacket():
 
 
-    def __init__(self):
-        self.rollers = list()
+    def __init__(self, rollers: List[Roller]=None):
+        if rollers is None:
+            self.rollers = list()
+        else:
+            self.rollers = rollers
 
     def add_rollers(self, in_roll_data: str, in_seg_fact):
         new_rollers = in_seg_fact.create_roller_by_string(in_roll_data)
@@ -26,7 +29,7 @@ class RollerPacket():
         rolled = list()
 
         for i in self.rollers:
-            rolled.append((i.roll(), i))
+            rolled.append((i.roll(), i.name))
             total += rolled[-1][0]
 
         return (total, rolled)

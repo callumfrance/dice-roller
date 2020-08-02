@@ -1,5 +1,6 @@
-from roller_factory import RollerFactory
-from roller_packet import RollerPacket
+from typing import List
+
+from .roller_packet import RollerPacket
 
 
 class Board():
@@ -7,21 +8,32 @@ class Board():
 
     def __init__(self):
         self.roller_packets = list()
-        self.roller_factory = RollerFactory()
 
-    def add_rollers(self, in_roll_data: str, in_seg_fact=None):
-        """ Use the RollerFactory to create new Rollers inside the RollerPacket
+    def add_packets(self, in_packet_data: str, in_seg_fact) -> List[RollerPacket]:
         """
-        if in_seg_fact is None:
-            in_seg_fact = self.roller_factory
+        Adds newly created RollerPackets to the board object and returns these
+            newly created objects in a list.
+        """
+        new_packs = in_seg_fact.create_packets_by_string(in_packet_data)
+        self.roller_packets += new_packs
+        return new_packs
+
+    def add_a_packet(self, in_roll_data: str, in_seg_fact) -> RollerPacket:
+        """ Use the RollerFactory to create a new RollerPacket containing Rollers
+
+        :return: The newly created RollerPacket, listed inside of Board object
+        :rtype: RollerPacket
+        """
 
         # New Rolls are a RollerPacket object of Roller objects
-        new_rollers = RollerPacket()
-        new_rollers.add_rollers(in_roll_data, in_seg_fact)
+        new_rpack = RollerPacket()
+        new_rpack.add_rollers(in_roll_data, in_seg_fact)
         # Board's self.roller_packets now contains the new RollerPacket item
-        self.roller_packets.append(new_rollers)
+        self.roller_packets.append(new_rpack)
 
-    def roll_all(self) -> int:
+        return new_rpack
+
+    def roll_all(self):
         all_packet_rolls = list()
 
         for x in self.roller_packets:

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+	<style>
+.breakdown {
+	display: flex;
+	flex-direction: row;
+}
+.a_roll {
+	width: 60px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+	align-items: center;
+}
+.a_roll_result {
+	background: hotpink;
+	width: 3em;
+	height: 3em;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.a_roll_result_txt {
+}
+.a_roll_name {
+	margin: 10px 5px 5px;
+}
+	</style>
+</head>
+<body>
+    <div style="background: PapayaWhip;" class="roll_results_1">
+        <hr>
+        {% for rp in whole_hog %}
+			<div class="roll_packet">
+				<h3>Total is {{ rp[0] }}</h3>
+				<div class="breakdown">
+					{% for in_di in rp[1] %}
+						<div class="a_roll">
+							<div class="a_roll_result">
+								<p class="a_roll_result_txt">
+								{{ in_di[0] }}
+								</p>
+							</div>
+							<p class="a_roll_name">{{ in_di[1] }}</p>
+						</div>
+					{% endfor %}
+				</div>
+			</div>
+			<hr>
+        {% endfor %}
+    </div>
+</body>
+</html>

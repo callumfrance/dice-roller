@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Dice Builder</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+	<style>
+	</style>
+</head>
+<body>
+	<div class="container-fluid">
+		<div class="row m-3">
+
+			{% for dice_type, dice_colour in dice_types.items() %}
+				{# dice_type must be 'd8' style string #}
+				{# dice_colour must be 'LimeGreen' style string #}
+				<div class="col-lg-2 col-md-4 col-sm-6 my-2">
+					<div class="row">
+						<div class="col-11 mx-auto">
+							<div class="card row">
+								<div class="input-group input-group-lg col-12">
+									<input id="{{ dice_type }}-input" class="form-control my-2" type="number">
+									<div class="input-group-append my-2" onClick="document.getElementById('{{ dice_type }}-input').value = 1;">
+										<span class="input-group-text" style="background:{{ dice_colour }};">{{ dice_type }}</span>
+									</div>
+								</div>
+								<div class="input-group input-group-lg col-12">
+									<button onClick="document.getElementById('{{ dice_type }}-input').value = '';" class="btn btn-secondary mb-2 col-12">Reset</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			{% endfor %}
+
+			<div class="col-sm-6 my-2">
+				<div class="row">
+					<div class="col-11 mx-auto">
+						<div class="card row">
+							<div class="input-group input-group-lg col-12">
+								<input class="form-control my-2" type="number">
+								<div class="input-group-append my-2"><span class="input-group-text">d</span></div>
+								<input class="form-control my-2" type="number">
+							</div>
+							<div class="input-group input-group-lg col-12">
+								<button onClick="document.getElementById('{{ dice_type }}-input').value = '';" class="btn btn-secondary mb-2 col-12">Reset</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="col-sm-6 my-2">
+				<div class="row">
+					<div class="col-11 mx-auto">
+						<div class="card row">
+							<div class="input-group input-group-lg col-12">
+								<div class="input-group-prepend my-2"><span class="input-group-text">Modifier</span></div>
+								<input class="form-control my-2" type="number">
+							</div>
+							<div class="input-group input-group-lg col-12">
+								<button onClick="document.getElementById('{{ dice_type }}-input').value = '';" class="btn btn-secondary mb-2 col-12">Reset</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</div>
+	</div>
+	<div class="container-fluid">
+		<div class="row justify-content-center m-4">
+			<form method="GET">
+				<input name="text">
+				<input type="submit">
+			</form>
+		</div>
+	</div>
+	<script>
+function addNewRoller(current_element, add_type, sign) {
+	if (isNaN(current_element.value)) {
+		current_element.value = 0;
+	}
+	current_element.value += 1;
+	current_element.innerHTML = sign + current_element.value + add_type;
+};
+
+function resetRollers(all_to_reset) {
+	all_to_reset.forEach(resetRoller);
+};
+
+function resetRoller(current_element) {
+	current_element.value = 0;
+	current_element.innerHTML = '-';
+};
+	</script>
+</body>
+</html>
