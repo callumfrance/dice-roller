@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title></title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 	<style>
 .breakdown {
 	display: flex;
@@ -31,26 +32,28 @@
 	</style>
 </head>
 <body>
-    <div style="background: PapayaWhip;" class="roll_results_1">
-        <hr>
-        {% for rp in whole_hog %}
-			<div class="roll_packet">
-				<h3>Total is {{ rp[0] }}</h3>
-				<div class="breakdown">
-					{% for in_di in rp[1] %}
-						<div class="a_roll">
-							<div class="a_roll_result">
-								<p class="a_roll_result_txt">
-								{{ in_di[0] }}
-								</p>
-							</div>
-							<p class="a_roll_name">{{ in_di[1] }}</p>
+	<div class="container-fluid">
+		{% for rp in whole_hog %}
+		<div class="row m-3">
+			<div class="col-12">
+				<h2>Total is {{ rp[0] }}:</h2>
+			</div>
+			{% for in_di in rp[1] %}
+			<div class="col-lg-2 col-md-3 col-4 my-2">
+				<div class="row">
+					<div class="card col-11 mx-auto text-center">
+						<div class="card-body">
+							<h3 class="card-title">{{ in_di[0] }}</h3>
+							<p class="card-text">{{ in_di[1] }}</p>
 						</div>
-					{% endfor %}
+					</div>
 				</div>
 			</div>
-			<hr>
-        {% endfor %}
-    </div>
+			{% endfor %}
+		</div>
+		<hr>
+		{% endfor %}
+	</div>
+
 </body>
 </html>

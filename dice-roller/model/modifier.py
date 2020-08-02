@@ -11,10 +11,10 @@ class Modifier(Roller):
             style: str=None, \
             sign: str='+', \
             name: str=None):
-        if not name:
-            name = type(self).__name__
-        super().__init__(sign=sign, style=style, name=name)
         self.value = value
+        super().__init__(sign=sign, style=style, name=name)
+        if not name:
+            self.name = str(self.sign) + str(self.value)
 
     @property
     def name(self):

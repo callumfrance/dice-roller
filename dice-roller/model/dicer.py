@@ -12,10 +12,10 @@ class Dicer(Roller):
             style=None, \
             sign: str='+', \
             name: str=None):
-        if not name:
-            name = type(self).__name__
-        super().__init__(sign=sign, style=style, name=name)
         self.sides = sides
+        super().__init__(sign=sign, style=style, name=name)
+        if not name:
+            self.name = str(self.sign) + "d" + str(self.sides)
 
     @property
     def sides(self) -> int:
