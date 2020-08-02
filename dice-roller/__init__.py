@@ -32,8 +32,9 @@ def create_app(test_config=None):
         if request.method == 'POST':
             mystr = ''
             for key in request.form:
-                mystr += key + ': ' + request.form[key] + ', '
-            return mystr
+                if request.form[key]:
+                    mystr += request.form[key] + key + ' + '
+            return redirect(url_for('dice_quick_roll', roll_str=mystr + '0'))
 
         dice = {'d4': 'LimeGreen', 
                 'd6': 'LightCoral', 
