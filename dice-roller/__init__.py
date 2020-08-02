@@ -27,8 +27,14 @@ def create_app(test_config=None):
                 whole_hog=roll, \
             )
 
-    @app.route('/build')
+    @app.route('/build', methods=['GET', 'POST'])
     def dice_build():
+        if request.method == 'POST':
+            mystr = ''
+            for key in request.form:
+                mystr += key + ': ' + request.form[key] + ', '
+            return mystr
+
         dice = {'d4': 'LimeGreen', 
                 'd6': 'LightCoral', 
                 'd8': 'DodgerBlue',

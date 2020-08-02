@@ -11,6 +11,7 @@
 </head>
 <body>
 	<div class="container-fluid">
+		<form method="POST">
 		<div class="row m-3">
 
 			{% for dice_type, dice_colour in dice_types.items() %}
@@ -21,7 +22,7 @@
 						<div class="col-11 mx-auto">
 							<div class="card row">
 								<div class="input-group input-group-lg col-12">
-									<input id="{{ dice_type }}-input" class="form-control my-2" type="number">
+									<input id="{{ dice_type }}-input" name="{{ dice_type }}-input" class="form-control my-2" type="number">
 									<div class="input-group-append my-2" onClick="document.getElementById('{{ dice_type }}-input').value = 1;">
 										<span class="input-group-text" style="background:{{ dice_colour }};">{{ dice_type }}</span>
 									</div>
@@ -68,15 +69,13 @@
 				</div>
 			</div>
 
+			<div class="my-3 container-fluid">
+				<div class="row justify-content-center">
+					<input type="submit">
+				</div>
+			</div>
 		</div>
-	</div>
-	<div class="container-fluid">
-		<div class="row justify-content-center m-4">
-			<form method="GET">
-				<input name="text">
-				<input type="submit">
-			</form>
-		</div>
+		</form>
 	</div>
 	<script>
 function addNewRoller(current_element, add_type, sign) {
