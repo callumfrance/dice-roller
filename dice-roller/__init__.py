@@ -31,10 +31,15 @@ def create_app(test_config=None):
     def dice_build():
         if request.method == 'POST':
             mystr = ''
-            for key in request.form:
+            for n, key in enumerate(request.form):
                 if request.form[key]:
-                    mystr += request.form[key] + key + ' + '
-            return redirect(url_for('dice_quick_roll', roll_str=mystr + '0'))
+                    if key == "m":
+                        mystr += request.form[key] + ' + '
+                    else:
+                        mystr += request.form[key] + key + ' + '
+                if n == len(request.form) - 1:
+                    mystr = mystr[:-3]
+            return redirect(url_for('dice_quick_roll', roll_str=mystr))
 
         dice = {'d4': 'LimeGreen', 
                 'd6': 'LightCoral', 
