@@ -7,6 +7,10 @@ class BoundedDicer(Dicer):
 
 
     def __init__(self, \
+            sides: int=6,
+            style=None,
+            sign: str='+',
+            name: str=None,
             in_min: int=1, \
             in_max=None):
         """ Constructor for the BoundedDicer class
@@ -14,13 +18,17 @@ class BoundedDicer(Dicer):
         :param in_min: The minimum possible integer to roll
         :param in_max: The maximum possible integer to roll
         """
-        super().__init__(self)
+        super().__init__(sides=sides, style=style, sign=sign, name=name)
         self.min_value = in_min
         self.max_value = in_max if in_max else self.sides
+        if not name:
+            self.name = str(self.sign) + "d" + str(self.sides) + '\n' \
+                    + '[' + str(self.sign) + str(self.min_value) + ',' \
+                    + str(self.sign) + str(self.max_value) + ']'
 
     @property
     def min_value(self) -> int:
-        return self.min_value
+        return self._min_value
 
     @min_value.setter
     def min_value(self, min_value: int=1):
@@ -34,17 +42,20 @@ class BoundedDicer(Dicer):
             min_value = 1
         if min_value > self.sides:
             min_value = self.sides
-        if self.max_value:
-            if min_value > self.max_value:
-                min_value = self.max_value
+        try:
+            if self.max_value:
+                if min_value > self.max_value:
+                    min_value = self.max_value
+        except AttributeError:
+            pass
         self._min_value = min_value
 
     @property
-    def min_value(self) -> int:
-        return self.min_value
+    def max_value(self) -> int:
+        return self._max_value
 
-    @min_value.setter
-    def min_value(self, max_value: int=6):
+    @max_value.setter
+    def max_value(self, max_value: int=6):
         """
         Sets the maximum value that can be rolled as an object property
 
@@ -54,9 +65,12 @@ class BoundedDicer(Dicer):
             max_value = 1
         if max_value > self.sides:
             max_value = self.sides
-        if self.min_value:
-            if self.min_value > max_value:
-                max_value = self.min_value
+        try:
+            if self.min_value:
+                if self.min_value > max_value:
+                    max_value = self.min_value
+        except AttributeError:
+            pass
         self._max_value = max_value
 
 
@@ -65,7 +79,7 @@ class BoundedDicer(Dicer):
         :return: The roll, bounded by either the min or max value
         :rtype: int
         """
-        base_roll = abs(super().roll(self))
+        base_roll = abs(super().roll())
 
         if base_roll < self.min_value:
             base_roll = self.min_value

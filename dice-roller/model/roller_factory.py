@@ -1,8 +1,10 @@
 from typing import List
+from re import split as re_split
 
 from .roller_packet import RollerPacket
 from .roller import Roller
 from .dicer import Dicer
+from .bounded_dicer import BoundedDicer
 from .modifier import Modifier
 
 
@@ -79,6 +81,25 @@ class RollerFactory():
             # We use the roll str piece to determine which Roller obj to make
             if len(roll_di) < 2:
                 new_rolls.append(Modifier(int(roll_di[0]), sign=sign_sequence[0]))
+            elif ('s' in roll_di[1]) or ('L' in roll_di[1]):
+                if not ('s' in roll_di[1]):
+                    roll_di_base = re_split('L', roll_di[1])[0] 
+                    roll_di_min = 1
+                    roll_di_max = re_split('L', roll_di[1])[1]
+                elif not ('L' in roll_di[1]):
+                    roll_di_base = re_split('s', roll_di[1])[0] 
+                    roll_di_min = re_split('s', roll_di[1])[1]
+                    roll_di_max = roll_di_base 
+                else:
+                    roll_di_base = re_split('s', roll_di[1])[0] 
+                    roll_di_min = re_split('s(.*.?)L', roll_di[1])[1]
+                    roll_di_max = re_split('L(.*.?)', roll_di[1])[1]
+                for x in range(int(roll_di[0])):
+                    new_rolls.append(BoundedDicer(int(roll_di_base), 
+                        sign=sign_sequence[0],
+                        in_min=int(roll_di_min),
+                        in_max=int(roll_di_max)
+                        ))
             else:
                 for x in range(int(roll_di[0])):
                     new_rolls.append(Dicer(int(roll_di[1]), sign=sign_sequence[0]))
@@ -98,4 +119,9 @@ if __name__ == '__main__':
     y = RollerFactory.create_roller_by_string("-1 + 2 + 3 -4 -5 -6 + 7 + 8 -9")
 
     for i in y:
+        print(type(i),"\t", vars(i))
+
+    z = RollerFactory.create_roller_by_string("2d8m3M5")
+
+    for i in z:
         print(type(i),"\t", vars(i))
