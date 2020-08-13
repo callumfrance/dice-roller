@@ -1,7 +1,11 @@
 /**
  * A class for containing a group of many different kinds of die.
  */
-class DiceSet {
+
+import { Die } from "./Die"
+import { DiceGroup } from "./DiceGroup"
+
+export class DiceSet {
     public diceGroups: Array<DiceGroup>;
 
     /**
@@ -13,13 +17,30 @@ class DiceSet {
     public constructor(diceGroups: Array<DiceGroup>);
     public constructor(diceGroups?: Array<DiceGroup>) {
         this.diceGroups = diceGroups ?? [
-            new DiceGroup(4, [new Die(4)]),
-            new DiceGroup(6, [new Die(6)]),
-            new DiceGroup(8, [new Die(8)]),
-            new DiceGroup(10, [new Die(10)]),
-            new DiceGroup(12, [new Die(12)]),
-            new DiceGroup(20, [new Die(20)]),
+            new DiceGroup(4),
+            new DiceGroup(6),
+            new DiceGroup(8),
+            new DiceGroup(10),
+            new DiceGroup(12),
+            new DiceGroup(20),
         ];
+    }
+
+    /**
+     * Returns a specific type of DiceSet where there is one die already
+     *  instantiated for each of the "characteristic" DiceGroups specified.
+     */
+    public diceSet1(): DiceSet {
+        return(
+            new DiceSet([
+                new DiceGroup(4, [new Die(4)]),
+                new DiceGroup(6, [new Die(6)]),
+                new DiceGroup(8, [new Die(8)]),
+                new DiceGroup(10, [new Die(10)]),
+                new DiceGroup(12, [new Die(12)]),
+                new DiceGroup(20, [new Die(20)]),
+            ],)
+        );
     }
 
     /**

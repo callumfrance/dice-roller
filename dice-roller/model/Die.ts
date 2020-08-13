@@ -1,7 +1,7 @@
 /**
  * The smallest rollable object. A single Die
  */
-class Die {
+export class Die {
     public sides: number;
     public name: string;
     public lastRoll?: number;

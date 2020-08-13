@@ -2,7 +2,10 @@
  * A class for containing a group of Dice which have the same number of sides.
  * A modifier value is placed here which can be added to the total roll once.
  */
-class DiceGroup {
+
+import { Die } from "./Die"
+
+export class DiceGroup {
     public diceType: number;
     public dice: Array<Die>;
     public modifier: number;
@@ -28,7 +31,7 @@ class DiceGroup {
      */
     public pushDie(inDice: Die): void;
     public pushDie(inDice: Array<Die>): void;
-    public pushDie(inDice) {
+    public pushDie(inDice: any) {
         if (inDice instanceof Array) {
             inDice.forEach( (element) => {
                 this.pushDie(element);
@@ -46,8 +49,8 @@ class DiceGroup {
     /**
      * Removes a Die from the first element of the Dice array
      */
-    public shiftDie(): Die {
-        return(this.dice.shift());
+    public shiftDie(): Die | null {
+        return(this.dice.shift() ?? null);
     }
 
     /**
@@ -59,9 +62,9 @@ class DiceGroup {
         let rolls: Array<number> = [];
 
         this.dice.forEach( (element) => {
-            element.roll();
-            total += element.lastRoll;
-            rolls.push(element.lastRoll);
+            let lastRoll: number = element.roll();
+            total += lastRoll;
+            rolls.push(lastRoll);
         });
 
         return([total, rolls, this.dice]);

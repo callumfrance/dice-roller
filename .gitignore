@@ -1,3 +1,5 @@
+dice-roller/model/built/
+
 lib-cov
 *.seed
 *.log
