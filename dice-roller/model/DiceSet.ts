@@ -46,6 +46,8 @@ export class DiceSet {
     /**
      * Adds a new DiceGroup to the DiceSet, provided an equivalent does
      *  not already exist.
+     *
+     *  @param inGroup - The new category of Die that is being added
      */
     public addGroup(inGroup: DiceGroup): void {
         this.diceGroups.forEach( (element) => {
@@ -58,8 +60,24 @@ export class DiceSet {
     }
 
     /**
+     * Pops a given category of Die off of the DiceSet
+     *
+     * @returns DiceGroup that was popped off, or nothing if it was never there
+     */
+    public removeGroup(sides: number): DiceGroup | void {
+        for (var i = 0; i < this.diceGroups.length; i++) {
+            if (this.diceGroups[i].diceType === sides) {
+                let grp = this.diceGroups.splice(i, 1);
+                return(grp[0]);
+            }
+        }
+    }
+
+    /**
      * Rolls every Die inside every DiceGroup and outputs the total as well
      *  as the result of each individual Die.
+     *
+     * @returns A tuple of the total roll with each individual roll it comprises
      */
     public rollSet(): [number, Array<number>] {
         let total: number = 0;
@@ -67,7 +85,9 @@ export class DiceSet {
 
         this.diceGroups.forEach( (element) => {
             total += element.rollGroup()[0];
-            rolls.push(element.rollGroup()[1][0]); // only prints 1st in Group
+            element.rollGroup()[1].forEach( (elementRoll) => {
+                rolls.push(elementRoll);
+            });
         });
         
         return([total, rolls]);

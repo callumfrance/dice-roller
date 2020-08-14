@@ -11,11 +11,7 @@ export class Die {
         name?: string,
     ) {
         this.sides = sides;
-        if (name) {
-            this.name = name;
-        } else {
-            this.name = String(sides);
-        }
+        this.name = name ?? ("d" + String(sides));
     }
 
     /**
